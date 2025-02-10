@@ -1,0 +1,434 @@
+[
+    {
+        "id": 0,
+        "recid": 0,
+        "name": "Curso E",
+        "type": "course"
+    },
+    {
+        "id": 1,
+        "recid": 1,
+        "name": "COURSE GUIDE",
+        "type": "page"
+    },
+    {
+        "id": 2,
+        "recid": 2,
+        "name": "SLIDES: Introduction",
+        "type": "page"
+    },
+    {
+        "id": 3,
+        "recid": 3,
+        "name": "VIDEO: How does an electric car work? (10 min)",
+        "type": "page"
+    },
+    {
+        "id": 4,
+        "recid": 4,
+        "name": "QUIZ: Previous knowledge",
+        "type": "page"
+    },
+    {
+        "id": 5,
+        "recid": 5,
+        "name": "SLIDES: Control and protection of electrical machines",
+        "type": "page"
+    },
+    {
+        "id": 6,
+        "recid": 6,
+        "name": "GUIÓN L1",
+        "type": "page"
+    },
+    {
+        "id": 7,
+        "recid": 7,
+        "name": "NOTES (EN): Control and protection of electrical machines",
+        "type": "page"
+    },
+    {
+        "id": 8,
+        "recid": 8,
+        "name": "SOFTWARE (ES): Cade Simu",
+        "type": "page"
+    },
+    {
+        "id": 9,
+        "recid": 9,
+        "name": "VIDEO (EN): Latching relay circuit",
+        "type": "page"
+    },
+    {
+        "id": 10,
+        "recid": 10,
+        "name": "VÍDEO (ES): ¿Cómo funciona un relé?",
+        "type": "page"
+    },
+    {
+        "id": 11,
+        "recid": 11,
+        "name": "PROBLEMS (EN): Wired automation",
+        "type": "page"
+    },
+    {
+        "id": 12,
+        "recid": 12,
+        "name": "SOLVED PROBLEMS (CADeSIME files): Problems 1, 2, 3, 4 & 6",
+        "type": "page"
+    },
+    {
+        "id": 13,
+        "recid": 13,
+        "name": "SLIDES: Transformers",
+        "type": "page"
+    },
+    {
+        "id": 14,
+        "recid": 14,
+        "name": "GUIÓN L2",
+        "type": "page"
+    },
+    {
+        "id": 15,
+        "recid": 15,
+        "name": "TRABAJO PREVIO",
+        "type": "page"
+    },
+    {
+        "id": 16,
+        "recid": 16,
+        "name": "HOJA DE RESULTADOS L1",
+        "type": "page"
+    },
+    {
+        "id": 17,
+        "recid": 17,
+        "name": "Entrega Trabajo previo y de la sesión de prácticas.",
+        "type": "page"
+    },
+    {
+        "id": 18,
+        "recid": 18,
+        "name": "NOTES (ES): UNICAN - Transformadores",
+        "type": "page"
+    },
+    {
+        "id": 19,
+        "recid": 19,
+        "name": "NOTES (ES): UNICAN - Transformadores: Índice horario",
+        "type": "page"
+    },
+    {
+        "id": 20,
+        "recid": 20,
+        "name": "NOTES (ES): UNICAN - Transformadores: Ejercicios resueltos",
+        "type": "page"
+    },
+    {
+        "id": 21,
+        "recid": 21,
+        "name": "EXERCISES U2",
+        "type": "page"
+    },
+    {
+        "id": 22,
+        "recid": 22,
+        "name": "Solved exam E1",
+        "type": "page"
+    },
+    {
+        "id": 23,
+        "recid": 23,
+        "name": "HOJA DE RESULTADOS L2",
+        "type": "page"
+    },
+    {
+        "id": 24,
+        "recid": 24,
+        "name": "ENTREGA SESIÓN DE PRÁCTICAS L2",
+        "type": "page"
+    },
+    {
+        "id": 25,
+        "recid": 25,
+        "name": "SLIDES: General principles of electrical rotating machines",
+        "type": "page"
+    },
+    {
+        "id": 26,
+        "recid": 26,
+        "name": "GUIÓN L3",
+        "type": "page"
+    },
+    {
+        "id": 27,
+        "recid": 27,
+        "name": "NOTES (ES): UNICAN - Principios generales de las máquinas eléctricas",
+        "type": "page"
+    },
+    {
+        "id": 28,
+        "recid": 28,
+        "name": "VIDEO (EN): Understanding RMF",
+        "type": "page"
+    },
+    {
+        "id": 29,
+        "recid": 29,
+        "name": "VIDEO (EN): Detailed explanation of the operation of an electric motor",
+        "type": "page"
+    },
+    {
+        "id": 30,
+        "recid": 30,
+        "name": "VIDEO (EN): BMW i8 electric engine manufacturing",
+        "type": "page"
+    },
+    {
+        "id": 31,
+        "recid": 31,
+        "name": "SLIDES: Synchronous machines",
+        "type": "page"
+    },
+    {
+        "id": 32,
+        "recid": 32,
+        "name": "GUIÓN L4",
+        "type": "page"
+    },
+    {
+        "id": 33,
+        "recid": 33,
+        "name": "HOJA DE RESULTADOS L3",
+        "type": "page"
+    },
+    {
+        "id": 34,
+        "recid": 34,
+        "name": "ENTREGA SESIÓN DE PRÁCTICAS L3",
+        "type": "page"
+    },
+    {
+        "id": 35,
+        "recid": 35,
+        "name": "NOTES (ES): UNICAN - Máquinas síncronas",
+        "type": "page"
+    },
+    {
+        "id": 36,
+        "recid": 36,
+        "name": "URL icon NOTES (ES): UNICAN - Máquina síncrona y red de potencia infinita",
+        "type": "page"
+    },
+    {
+        "id": 37,
+        "recid": 37,
+        "name": "NOTES (ES): UNICAN - Máquinas síncronas: Potencias",
+        "type": "page"
+    },
+    {
+        "id": 38,
+        "recid": 38,
+        "name": "NOTES (ES): UNICAN - Máquinas síncronas: Problemas resueltos",
+        "type": "page"
+    },
+    {
+        "id": 39,
+        "recid": 39,
+        "name": "EXERCISES U4",
+        "type": "page"
+    },
+    {
+        "id": 40,
+        "recid": 40,
+        "name": "VIDEO (EN): Working of Synchronous Motor",
+        "type": "page"
+    },
+    {
+        "id": 41,
+        "recid": 41,
+        "name": "VIDEO (EN): How does an Alternator Work?",
+        "type": "page"
+    },
+    {
+        "id": 42,
+        "recid": 42,
+        "name": "Solved exam E2",
+        "type": "page"
+    },
+    {
+        "id": 43,
+        "recid": 43,
+        "name": "HOJA DE RESULTADOS L4",
+        "type": "page"
+    },
+    {
+        "id": 44,
+        "recid": 44,
+        "name": "ENTREGA SESIÓN DE PRÁCTICAS L4",
+        "type": "page"
+    },
+    {
+        "id": 45,
+        "recid": 45,
+        "name": "SLIDES: Asynchronous machines",
+        "type": "page"
+    },
+    {
+        "id": 46,
+        "recid": 46,
+        "name": "GUIÓN L5",
+        "type": "page"
+    },
+    {
+        "id": 47,
+        "recid": 47,
+        "name": "NOTES (ES): UNICAN - Máquinas asíncronas o de inducción",
+        "type": "page"
+    },
+    {
+        "id": 48,
+        "recid": 48,
+        "name": "SUMMARY(ES): UNICAN - Máquinas asíncronas o de inducción",
+        "type": "page"
+    },
+    {
+        "id": 49,
+        "recid": 49,
+        "name": "EXERCISES (ES): UNICAN - Máquinas asíncronas o de inducción (I)",
+        "type": "page"
+    },
+    {
+        "id": 50,
+        "recid": 50,
+        "name": "EXERCISES (ES): UNICAN - Máquinas asíncronas o de inducción (II)",
+        "type": "page"
+    },
+    {
+        "id": 51,
+        "recid": 51,
+        "name": "EXERCISES U5",
+        "type": "page"
+    },
+    {
+        "id": 52,
+        "recid": 52,
+        "name": "VIDEO (EN): How does an induction motor work?",
+        "type": "page"
+    },
+    {
+        "id": 53,
+        "recid": 53,
+        "name": "SLIDES: DC machines",
+        "type": "page"
+    },
+    {
+        "id": 54,
+        "recid": 54,
+        "name": "GUIÓN L6",
+        "type": "page"
+    },
+    {
+        "id": 55,
+        "recid": 55,
+        "name": "HOJA DE RESULTADOS L5",
+        "type": "page"
+    },
+    {
+        "id": 56,
+        "recid": 56,
+        "name": "MOTOR ASÍNCRONO VARIADOR DE FRECUENCIA",
+        "type": "page"
+    },
+    {
+        "id": 57,
+        "recid": 57,
+        "name": "NOTES (ES): UNICAN - Máquinas de corriente contínua",
+        "type": "page"
+    },
+    {
+        "id": 58,
+        "recid": 58,
+        "name": "EXERCISES (ES): UNICAN - Máquinas de corriente contínua (I)",
+        "type": "page"
+    },
+    {
+        "id": 59,
+        "recid": 59,
+        "name": "EXERCISES (ES): UNICAN - Máquinas de corriente contínua (II)",
+        "type": "page"
+    },
+    {
+        "id": 60,
+        "recid": 60,
+        "name": "EXERCISES U6",
+        "type": "page"
+    },
+    {
+        "id": 61,
+        "recid": 61,
+        "name": "VIDEO (EN): DC Motor, How it works?",
+        "type": "page"
+    },
+    {
+        "id": 62,
+        "recid": 62,
+        "name": "VIDEO (EN): How does a DC motor work?",
+        "type": "page"
+    },
+    {
+        "id": 63,
+        "recid": 63,
+        "name": "SLIDES: Electronically switched motors",
+        "type": "page"
+    },
+    {
+        "id": 64,
+        "recid": 64,
+        "name": "HOJA DE RESULTADOS L6",
+        "type": "page"
+    },
+    {
+        "id": 65,
+        "recid": 65,
+        "name": "PRÁCTICA MOTOR PASO A PASO",
+        "type": "page"
+    },
+    {
+        "id": 66,
+        "recid": 66,
+        "name": "DOC (EN): Stepper motor basics",
+        "type": "page"
+    },
+    {
+        "id": 67,
+        "recid": 67,
+        "name": "VIDEO (EN): How does a stepper motor work?",
+        "type": "page"
+    },
+    {
+        "id": 68,
+        "recid": 68,
+        "name": "VIDEO (EN): Brushless DC Motor, How it works?",
+        "type": "page"
+    },
+    {
+        "id": 69,
+        "recid": 69,
+        "name": "VIDEO (EN): Synchronous Reluctance Motor",
+        "type": "page"
+    },
+    {
+        "id": 70,
+        "recid": 70,
+        "name": "VIDEO (EN): How does a resolver work?",
+        "type": "page"
+    },
+    {
+        "id": 71,
+        "recid": 71,
+        "name": "Solved exam F1",
+        "type": "page"
+    }
+]

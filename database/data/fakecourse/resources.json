@@ -1,0 +1,185 @@
+[
+    {
+        "id": 0,
+        "recid": 0,
+        "name": "Initial Exam",
+        "type": "course"
+    },
+    {
+        "id": 1,
+        "recid": 1,
+        "name": "Introduction to Generative AI",
+        "type": "page"
+    },
+    {
+        "id": 2,
+        "recid": 2,
+        "name": "Generative AI and LLMs",
+        "type": "page"
+    },
+    {
+        "id": 3,
+        "recid": 3,
+        "name": "Use Cases",
+        "type": "page"
+    },
+    {
+        "id": 4,
+        "recid": 4,
+        "name": "Before Transformers",
+        "type": "page"
+    },
+    {
+        "id": 5,
+        "recid": 5,
+        "name": "Trasformer Architecture",
+        "type": "page"
+    },
+    {
+        "id": 6,
+        "recid": 6,
+        "name": "Generating Text",
+        "type": "page"
+    },
+    {
+        "id": 7,
+        "recid": 7,
+        "name": "Prompting",
+        "type": "page"
+    },
+    {
+        "id": 8,
+        "recid": 8,
+        "name": "Project Live Cycle",
+        "type": "page"
+    },
+    {
+        "id": 9,
+        "recid": 9,
+        "name": "Configuration",
+        "type": "page"
+    },
+    {
+        "id": 10,
+        "recid": 10,
+        "name": "Life cycle times",
+        "type": "page"
+    },
+    {
+        "id": 11,
+        "recid": 11,
+        "name": "Practice Prompting",
+        "type": "quiz",
+        "quizid": 1
+    },
+    {
+        "id": 12,
+        "recid": 12,
+        "name": "Pre-training",
+        "type": "page"
+    },
+    {
+        "id": 13,
+        "recid": 13,
+        "name": "Computational Challenge",
+        "type": "page"
+    },
+    {
+        "id": 14,
+        "recid": 14,
+        "name": "Multi-GPU",
+        "type": "page"
+    },
+    {
+        "id": 15,
+        "recid": 15,
+        "name": "Optimization",
+        "type": "page"
+    },
+    {
+        "id": 16,
+        "recid": 16,
+        "name": "Introduction to usage",
+        "type": "page"
+    },
+    {
+        "id": 17,
+        "recid": 17,
+        "name": "Evaluation",
+        "type": "page"
+    },
+    {
+        "id": 18,
+        "recid": 18,
+        "name": "Preparing fine-tuning",
+        "type": "page"
+    },
+    {
+        "id": 19,
+        "recid": 19,
+        "name": "Catastrophic forgetting",
+        "type": "page"
+    },
+    {
+        "id": 20,
+        "recid": 20,
+        "name": "Multi task fine-tuning",
+        "type": "page"
+    },
+    {
+        "id": 21,
+        "recid": 21,
+        "name": "PEFT",
+        "type": "page"
+    },
+    {
+        "id": 22,
+        "recid": 22,
+        "name": "LoRa",
+        "type": "page"
+    },
+    {
+        "id": 23,
+        "recid": 23,
+        "name": "Prompt tuning",
+        "type": "page"
+    },
+    {
+        "id": 24,
+        "recid": 24,
+        "name": "Practice fine-tuning",
+        "type": "quiz",
+        "quizid": 2
+    },
+    {
+        "id": 25,
+        "recid": 25,
+        "name": "Responsible AI",
+        "type": "page"
+    },
+    {
+        "id": 26,
+        "recid": 26,
+        "name": "Applications Architecture",
+        "type": "page"
+    },
+    {
+        "id": 27,
+        "recid": 27,
+        "name": "Using LLMS in applications",
+        "type": "page"
+    },
+    {
+        "id": 28,
+        "recid": 28,
+        "name": "External app interaction",
+        "type": "page"
+    },
+    {
+        "id": 29,
+        "recid": 29,
+        "name": "Final Exam",
+        "type": "quiz",
+        "quizid": 3
+    }
+]
