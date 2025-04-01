@@ -25,10 +25,10 @@ from evaluation.metrics.mapk import average_precision_at_k
 
 
 if __name__ == "__main__":
-    courses = ["ecourse"] # "" is runnig
+    courses = ["fakecourse", "ecourse", "vcourse"] # "" is runnig
 
     for course in courses:
-        # Triples
+        # Load Course Triples into a Graph
         with open(f"./database/data/{course}/prev_graph.json", "r") as gd:
             graph_data: dict = json.load(gd)
         with open(f"./database/data/{course}/repeat_graph.json", "r") as gb:
@@ -75,14 +75,14 @@ if __name__ == "__main__":
                     resource_dict[int(k)].recid, resource_dict[int(j)].recid
                 )
 
-        # Convertir a tensores
+        # Convert into Tensors
         triples = torch.tensor(triples, dtype=torch.long)
 
-        # Get shortest paths
+        # Get Shortest Paths for Negative Sampling
         prev_paths: dict = dict(all_pairs_shortest_path_length(prev_graph))
         repeat_paths: dict = dict(all_pairs_shortest_path_length(repeat_graph))
 
-        # Hiperparámetros
+        # Hyperparameters and combinations
         learning_rates = [0.001, 0.01, 0.1, 0.0001]
         embedding_dims = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
         margins = [0.5, 1.0, 1.5, 2.0]
@@ -92,11 +92,12 @@ if __name__ == "__main__":
             itertools.product(learning_rates, embedding_dims, margins, batch_sizes)
         )
 
-        # Training history
+        # Training history variables
         num_epochs = 600
         kfolds = 10
         history = {}
 
+        # Select device
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         for combination in tqdm(combinations):
@@ -105,27 +106,29 @@ if __name__ == "__main__":
 
             fold_metrics = {}
             for fold in range(kfolds):
+                # Start training
                 best_loss = float("inf")
                 best_model_state_dict = None
 
-                # Dataset
+                # Load dataset
                 dataset = KnowledgeDataset(
                     triples, num_entities, 1, prev_paths, repeat_paths
                 )
                 loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
-                # Modelo
+                # Load model
                 criterion = nn.MarginRankingLoss(margin=margin)
                 model = TransE(num_entities, num_relations, embedding_dim, embedding_dim, device, criterion)
                 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
+                # Training loop
                 for epoch in range(num_epochs):
                     model.train()
                     total_loss = 0
 
-                    # Crear batches
+                    # Create batches
                     for heads, relations, tails, neg_tails in loader:
-                        # Calcular pérdida
+                        # Calculate Loss
                         loss = model.negative_sample_loss(
                             heads.to(device),
                             relations.to(device),
@@ -134,28 +137,28 @@ if __name__ == "__main__":
                         )
                         total_loss += loss.item()
 
-                        # Optimización
+                        # Optimization Step
                         optimizer.zero_grad()
                         loss.backward()
                         optimizer.step()
 
+                    # Save best model
                     if total_loss < best_loss:
                         best_loss = total_loss
                         best_model_state_dict = copy.deepcopy(model.state_dict())
 
-                # Test mmrr and topk
+                # Test mmrr and map with best model
                 model.load_state_dict(best_model_state_dict)
 
                 top_k_3 = 3
                 top_k_5 = 5
                 top_k_7 = 7
-                # topk3_accuracies = []
-                # topk5_accuracies = []
-                # topk7_accuracies = []
                 mmrr_accuracies = []
                 map3_scores = []
                 map5_scores = []
                 map7_scores = []
+
+                # Test for previous relation
                 for tg_entity in graph_data.keys():
                     y_true = graph_data[tg_entity][:top_k_3]
                     y_true_5 = graph_data[tg_entity][:top_k_5]
@@ -174,20 +177,16 @@ if __name__ == "__main__":
                         1 if res.id in graph_data[str(tg_entity)] else 0
                         for res in resources
                     ]
-                    # topk_accuracy_3 = top_k_accuracy(y_true, scores, top_k_3)
-                    # topk_accuracy_5 = top_k_accuracy(y_true_5, scores, top_k_5)
-                    # topk_accuracy_7 = top_k_accuracy(y_true_7, scores, top_k_7)
                     mmrr_accuracy = mean_reciprocal_rank(y_true, scores)
                     map3 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_3)
                     map5 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_5)
                     map7 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_7)
-                    # topk3_accuracies.append(topk_accuracy_3)
-                    # topk5_accuracies.append(topk_accuracy_5)
-                    # topk7_accuracies.append(topk_accuracy_7)
                     mmrr_accuracies.append(mmrr_accuracy)
                     map3_scores.append(map3)
                     map5_scores.append(map5)
                     map7_scores.append(map7)
+
+                # Test for revisit relation
                 for tg_entity in graph_back.keys():
                     y_true = graph_back[tg_entity][:top_k_3]
                     y_true_5 = graph_back[tg_entity][:top_k_5]
@@ -206,31 +205,25 @@ if __name__ == "__main__":
                         1 if res.id in graph_back[str(tg_entity)] else 0
                         for res in resources
                     ]
-                    # topk_accuracy_3 = top_k_accuracy(y_true, scores, top_k_3)
-                    # topk_accuracy_5 = top_k_accuracy(y_true_5, scores, top_k_5)
-                    # topk_accuracy_7 = top_k_accuracy(y_true_7, scores, top_k_7)
                     mmrr_accuracy = mean_reciprocal_rank(y_true, scores)
                     map3 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_3)
                     map5 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_5)
-                    map7 = average_precision_at_k(y_true_binary, scores.tolist(), top_k_7)
-                    # topk3_accuracies.append(topk_accuracy_3)
-                    # topk5_accuracies.append(topk_accuracy_5)
-                    # topk7_accuracies.append(topk_accuracy_7)
                     mmrr_accuracies.append(mmrr_accuracy)
                     map3_scores.append(map3)
                     map5_scores.append(map5)
                     map7_scores.append(map7)
+
+                # Save current metrics
                 fold_metrics[fold] = {
-                    # "topk3": np.mean(topk3_accuracies, axis=0).tolist(),
-                    # "topk5": np.mean(topk5_accuracies, axis=0).tolist(),
-                    # "topk7": np.mean(topk7_accuracies, axis=0).tolist(),
                     "mmrr": np.mean(mmrr_accuracies),
                     "map3": np.mean(map3_scores),
                     "map5": np.mean(map5_scores),
                     "map7": np.mean(map7_scores),
                 }
 
+            # Save fold metrics
             key = str(combination[0]) + "-" + str(combination[1]) + "-" + str(combination[2]) + "-" + str(combination[3])
             history["".join(key)] = fold_metrics
 
+        # Save history
         json.dump(history, open(f"training/hyperparameter_transr_{course}.json", "w"))
