@@ -26,7 +26,7 @@ from embedders.knowledge.trans import Trans
 
 if __name__ == "__main__":
     # Triples
-    course = 'ecourse'
+    course = 'fakecourse'
     with open(f"./database/data/{course}/prev_graph.json", "r") as gd:
         graph_data: dict = json.load(gd)
     with open(f"./database/data/{course}/repeat_graph.json", "r") as gb:
@@ -37,9 +37,6 @@ if __name__ == "__main__":
         len(v) for v in graph_back.values()
     )
     num_relations = 2
-    embedding_dim = 50
-    project_dim = 50
-    margin = 1.0
 
     triples = np.zeros((num_triples, 3), dtype=int)
     relations = {"is_previous_of": 0, "needs_repeat": 1}
@@ -84,10 +81,13 @@ if __name__ == "__main__":
     repeat_paths: dict = dict(all_pairs_shortest_path_length(repeat_graph))
 
     # Hiperparámetros
-    learning_rate = 0.001
+    learning_rate = 0.0001
     num_epochs = 1000
-    batch_size = 8
-    kfolds = 10
+    batch_size = 20
+    kfolds = 1
+    embedding_dim = 120
+    project_dim = 120
+    margin = 2.0
 
     # Training history
     history = np.zeros((kfolds, num_epochs))
@@ -96,10 +96,10 @@ if __name__ == "__main__":
     criterion = nn.MarginRankingLoss(margin=margin)
 
     models: List[Trans] = [
-        TransE(num_entities, num_relations, embedding_dim, device),
-        TransR(num_entities, num_relations, embedding_dim, project_dim, device),
+        # TransE(num_entities, num_relations, embedding_dim, device),
+        # TransR(num_entities, num_relations, embedding_dim, project_dim, device),
         TransH(num_entities, num_relations, embedding_dim, device),
-        RotatE(num_entities, num_relations, embedding_dim, device),
+        # RotatE(num_entities, num_relations, embedding_dim, device),
     ]
 
     # Entrenamiento
