@@ -27,16 +27,16 @@ def main() -> None:
                 id=student["id"],
                 username=student["username"],
                 email=student["email"],
-                password=os.getenv("USER_API_PASS"),
+                password="admin",
             )
         )
 
     client.create_user(
-        User(id=0, username="admin", email="admin", password=os.getenv("USER_API_PASS"))
+        User(id=0, username="admin", email="admin", password="admin")
     )
 
     # Add items data
-    with open("database/data/resources.json") as f:
+    with open("database/data/fakecourse/resources.json") as f:
         items = json.load(f)
 
     for item in items:

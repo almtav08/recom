@@ -3,7 +3,7 @@ import json
 
 if __name__ == "__main__":
     users = []
-    for i in range(1, 2001):
+    for i in range(1, 5001):
         users.append({'id': i, 'username': f'user{i}', 'email': f"user{i}@fake.com"})
 
     with open('./database/students.json', 'w') as f:

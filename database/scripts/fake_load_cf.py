@@ -10,7 +10,7 @@ from database.models.db import Interaction
 if __name__ == "__main__":
     client = QueryGenerator()
     client.connect()
-    resources = client.list_resources()
+    # resources = client.list_resources()
     users = client.list_users()
 
     path_a = [2, 5, 7, 8, 11, 15, 17, 18, 21, 24, 29] # Ve solo lo obligatorio # Aprueba
@@ -30,15 +30,15 @@ if __name__ == "__main__":
         user_path = path.copy()
         # Add the chance to change to permute two items in the path
         rand_idx = -1
-        if random.random() < 0.1:
-            index = random.randint(0, len(user_path) - 1)
+        if random.random() < 0.6:
+            index = random.randint(0, len(user_path) - 2)
             if index + 1 < len(user_path):
                 rand_idx = index
                 user_path[index], user_path[index + 1] = user_path[index + 1], user_path[index]
         random_change = False
         for item in user_path:
             # Add the chance to change to a random item
-            if item != 29 and random.random() < 0.1 and not random_change and rand_idx != item:
+            if item != 29 and random.random() < 0.5 and not random_change and rand_idx != item:
                 item = random.randint(1, 28)
                 random_change = True
             client.insert_interaction(Interaction(timestamp=int(time.time()), user_id=user.id, resource_id=item))
