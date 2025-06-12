@@ -59,4 +59,4 @@ class CollaborativeBinaryDataset(Dataset):
         anchor_embedding = self.knowledge_embedder.embed(anchor_path).to(self.device)
         idx_anchor = idx
 
-        return idx_anchor, anchor_embedding
+        return idx_anchor, anchor_embedding, anchor_path

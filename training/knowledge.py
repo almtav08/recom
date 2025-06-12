@@ -26,7 +26,7 @@ from embedders.knowledge.trans import Trans
 
 if __name__ == "__main__":
     # Triples
-    course = 'fakecourse'
+    course = 'vcourse'
     with open(f"./database/data/{course}/prev_graph.json", "r") as gd:
         graph_data: dict = json.load(gd)
     with open(f"./database/data/{course}/repeat_graph.json", "r") as gb:
@@ -81,12 +81,12 @@ if __name__ == "__main__":
     repeat_paths: dict = dict(all_pairs_shortest_path_length(repeat_graph))
 
     # Hiperparámetros
-    learning_rate = 0.0001
+    learning_rate = 0.001
     num_epochs = 1000
     batch_size = 20
     kfolds = 1
-    embedding_dim = 120
-    project_dim = 120
+    embedding_dim = 100
+    project_dim = 100
     margin = 2.0
 
     # Training history
@@ -98,8 +98,8 @@ if __name__ == "__main__":
     models: List[Trans] = [
         # TransE(num_entities, num_relations, embedding_dim, device),
         # TransR(num_entities, num_relations, embedding_dim, project_dim, device),
-        TransH(num_entities, num_relations, embedding_dim, device),
-        # RotatE(num_entities, num_relations, embedding_dim, device),
+        # TransH(num_entities, num_relations, embedding_dim, device),
+        RotatE(num_entities, num_relations, embedding_dim, device),
     ]
 
     # Entrenamiento

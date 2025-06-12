@@ -52,6 +52,14 @@ class QueryGenerator:
         self.session.commit()
         self.session.refresh(interaction)
         return interaction
+    
+    def insert_interactions(self, interactions: list[Interaction]) -> list[Interaction]:
+        for interaction in interactions:
+            self.session.add(interaction)
+        self.session.commit()
+        for interaction in interactions:
+            self.session.refresh(interaction)
+        return interactions
 
     def delete_interaction(self, interaction_id: int) -> Interaction:
         statement = select(Interaction).where(Interaction.id == interaction_id)
@@ -81,8 +89,24 @@ class QueryGenerator:
         self.session.refresh(user)
         return user
     
+    def create_users(self, users: list[User]) -> list[User]:
+        for user in users:
+            self.session.add(user)
+        self.session.commit()
+        for user in users:
+            self.session.refresh(user)
+        return users
+    
     def create_resource(self, resource: Resource) -> Resource:
         self.session.add(resource)
         self.session.commit()
         self.session.refresh(resource)
         return resource
+    
+    def create_resources(self, resources: list[Resource]) -> list[Resource]:
+        for resource in resources:
+            self.session.add(resource)
+        self.session.commit()
+        for resource in resources:
+            self.session.refresh(resource)
+        return resources

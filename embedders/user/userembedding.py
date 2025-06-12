@@ -15,7 +15,7 @@ class UserEmbedding(nn.Module):
         self.criterion = criterion
 
         # GRU layer
-        self.gru = nn.GRU(input_size, hidden_size, batch_first=True, device=device)
+        self.gru = nn.LSTM(input_size, hidden_size, batch_first=True, device=device) # Best RNN
 
         # Attention layer
         self.attention = nn.Linear(hidden_size, 1, device=device)

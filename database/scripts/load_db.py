@@ -21,8 +21,9 @@ def main() -> None:
     with open("database/data/students.json") as f:
         students = json.load(f)
 
+    users = []
     for student in students:
-        client.create_user(
+        users.append(
             User(
                 id=student["id"],
                 username=student["username"],
@@ -30,18 +31,17 @@ def main() -> None:
                 password="admin",
             )
         )
-
-    client.create_user(
-        User(id=0, username="admin", email="admin", password="admin")
-    )
+    client.create_users(users)
+    print(f"Added {len(users)} students")
 
     # Add items data
-    with open("database/data/fakecourse/resources.json") as f:
+    with open("database/data/vcourse/resources.json") as f:
         items = json.load(f)
 
+    resources = []
     for item in items:
         if item["type"] == "quiz":
-            client.create_resource(
+            resources.append(
                 Resource(
                     id=item["id"],
                     recid=item["recid"],
@@ -51,7 +51,7 @@ def main() -> None:
                 )
             )
         else:
-            client.create_resource(
+            resources.append(
                 Resource(
                     id=item["id"],
                     recid=item["recid"],
@@ -59,22 +59,19 @@ def main() -> None:
                     type=item["type"],
                 )
             )
+    client.create_resources(resources)
+    print(f"Added {len(resources)} items")
 
     # Add interactions data
     # with open('database/logs.json') as f:
     #     logs = json.load(f)
 
+    interactions = []
     for student in students:
-        client.insert_interaction(
+        interactions.append(
             Interaction(timestamp="1726814835", user_id=student["id"], resource_id=0)
         )
-
-    # for log in logs:
-    #     client.insert_interaction(Interaction(timestamp=log['timestamp'], user_id=log['user_id'], resource_id=log['resource_id']))
-
-    # os.remove('database/students.json')
-    # os.remove('database/resources.json')
-    # os.remove('database/logs.json')
+    client.insert_interactions(interactions)
 
 
 if __name__ == "__main__":

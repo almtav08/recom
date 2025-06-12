@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from .lightgru import LightGRUCell, MidGRUCell, SimpleGatedRNN
 
 
 class UserEmbeddingCross(nn.Module):
@@ -38,6 +39,18 @@ class UserEmbeddingCross(nn.Module):
 
         self.to(device)
 
+    def _run_light_gru(self, path):
+        batch_size, seq_len, _ = path.shape
+        h = torch.zeros(batch_size, self.hidden_size, device=self.device)
+        outputs = []
+
+        for t in range(seq_len):
+            x_t = path[:, t, :]  # (batch_size, input_size)
+            h = self.gru(x_t, h)
+            outputs.append(h.unsqueeze(1))  # keep time dimension
+
+        return torch.cat(outputs, dim=1)  # (batch_size, seq_len, hidden_size)
+
     def forward(self, path):
         """
         Forward pass through the network.
@@ -48,6 +61,7 @@ class UserEmbeddingCross(nn.Module):
         """
         # Pass through GRU
         gru_out, _ = self.gru(path)  # shape: (batch_size, seq_length, hidden_size)
+        # gru_out = self._run_light_gru(path)
 
         # Calculate attention weights
         attention_weights = torch.softmax(
@@ -76,6 +90,7 @@ class UserEmbeddingCross(nn.Module):
         """
         # Pass through GRU
         gru_out, _ = self.gru(path)  # shape: (batch_size, seq_length, hidden_size)
+        # gru_out = self._run_light_gru(path)
 
         # Calculate attention weights
         attention_weights = torch.softmax(
