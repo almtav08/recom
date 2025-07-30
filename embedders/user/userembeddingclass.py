@@ -18,7 +18,7 @@ class UserEmbeddingClassifier(nn.Module):
         self.criterion = criterion
 
         # GRU layer
-        self.gru = nn.GRU(input_size, hidden_size, batch_first=True, device=device)
+        self.gru = nn.GRU(input_size, hidden_size, batch_first=True, device=device, num_layers=6)
 
         # Attention layer
         self.attention = nn.Linear(hidden_size, 1, device=device)

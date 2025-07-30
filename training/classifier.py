@@ -25,7 +25,7 @@ if __name__ == "__main__":
     model = UserEmbeddingClassifier(100, 50, 30, device)
     # model = UserEmbeddingCross(100, 50, 30, device)
     kfolds = 1
-    learning_rate = 0.00001
+    learning_rate = 0.0001
     num_epochs = 300
     max_interactions = 35
     batch_size = 16
@@ -45,15 +45,15 @@ if __name__ == "__main__":
 
     criterion = nn.BCEWithLogitsLoss()
     # criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
-    # optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-3)
+    optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.96)
+    # optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-6)
     # optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-6)
-    # optimizer = optim.Adagrad(model.parameters(), lr=learning_rate, weight_decay=1e-6)
+    # optimizer = optim.Adagrad(model.parameters(), lr=learning_rate, weight_decay=1e-7)
 
     y_preds = []
     y_trues = []
 
-    for i in tqdm(range(len(Y_all))):
+    for user in tqdm(range(len(Y_all))):
         model = model.untrained_copy()
         model.set_criterion(criterion)
 
@@ -61,20 +61,16 @@ if __name__ == "__main__":
         Y_train = []
 
         for j in range(len(Y_all)):
-            if j != i:
+            if j != user:
                 X_train.append(X_all[j])
                 Y_train.append(Y_all[j])
 
         model.train()
         for j in range(num_epochs):
 
-            # Shuffle the training data
-            indices = list(range(len(X_train)))
-            random.shuffle(indices)
-
             # Separate the indices into batches
-            positive_indices = [i for i in indices if Y_train[i] == 1]
-            negative_indices = [i for i in indices if Y_train[i] == 0]
+            positive_indices = [i for i in range(len(X_train)) if Y_train[i] == 1]
+            negative_indices = [i for i in range(len(X_train)) if Y_train[i] == 0]
 
             random.shuffle(positive_indices)
             random.shuffle(negative_indices)
@@ -82,12 +78,9 @@ if __name__ == "__main__":
             half_batch = batch_size // 2
             batches = []
 
-            for i in range(0, min(len(positive_indices), len(negative_indices)), half_batch):
-                pos_batch = positive_indices[i:i + half_batch]
-                neg_batch = negative_indices[i:i + half_batch]
-                
-                if len(pos_batch) < half_batch or len(neg_batch) < half_batch:
-                    continue  # Salta si no puede completar el batch
+            for k in range(0, max(len(positive_indices), len(negative_indices)), half_batch):
+                pos_batch = positive_indices[k:k + half_batch] if k < len(positive_indices) else []
+                neg_batch = negative_indices[k:k + half_batch] if k < len(negative_indices) else []
 
                 batch_indices = pos_batch + neg_batch
                 random.shuffle(batch_indices)
@@ -108,14 +101,14 @@ if __name__ == "__main__":
                 optimizer.step()
 
         model.eval()
-        X_test = X_all[0][:max_interactions].unsqueeze(0)
+        X_test = X_all[user][:max_interactions].unsqueeze(0)
 
         proba = model.classify(X_test)[0]
         pred = 1 if proba.item() >= 0.5 else 0
         # pred = model.classify(X_test)[0].item()
 
         y_preds.append(pred)
-        y_trues.append(Y_all[i])
+        y_trues.append(Y_all[user])
 
     # Evaluación final
     accuracy = np.mean(np.array(y_preds) == np.array(y_trues))

@@ -127,8 +127,8 @@ if __name__ == "__main__":
     avg_fail_length = np.mean(fail_length) if fail_paths else 1
     std_fail_length = np.std(fail_length) if fail_paths else 0
 
-    pass_generator = MarkovPathGenerator(final_exam_id=120, order=4)
-    fail_generator = MarkovPathGenerator(final_exam_id=120, order=4)
+    pass_generator = MarkovPathGenerator(final_exam_id=120, order=2)
+    fail_generator = MarkovPathGenerator(final_exam_id=120, order=2)
 
     pass_generator.train(pass_paths)
     fail_generator.train(fail_paths)
@@ -137,19 +137,20 @@ if __name__ == "__main__":
     client.connect()
     users = client.list_users()
 
-    n_pass_users = int(len(users) * 0.5)
-    n_fail_users = len(users) - n_pass_users
-
     real_pass_users = [
         student for student, result in student_results.items() if result == "Pass"
     ]
     real_fail_users = [
         student for student, result in student_results.items() if result == "Fail"
     ]
+
+    n_pass_users = int(len(real_pass_users) +21)
+    n_fail_users = len(users) - n_pass_users
+
     print(
         f"Generando {n_pass_users - len(real_pass_users)} usuarios aprobados y {n_fail_users - len(real_fail_users)} usuarios suspendidos..."
     )
-    
+
     user_grades = {}
     for i in tqdm(range(len(users))):
         interactions = []

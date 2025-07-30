@@ -15,8 +15,8 @@ class GCNLSTM(nn.Module):
         self.class_dim = class_dim
         self.device = device if device is not None else torch.device("cpu")
         semisuma = (in_channels + hidden_channels) // 2
-        self.conv = GATConv(in_channels, semisuma)
-        self.conv1 = GATConv(semisuma, hidden_channels)
+        self.conv = GCNConv(in_channels, semisuma)
+        self.conv1 = GCNConv(semisuma, hidden_channels)
         self.aggr = LSTMAggregation(hidden_channels, lstm_hidden_dim)
         self.fc = nn.Linear(lstm_hidden_dim, output_dim)
         self.clas = nn.Linear(output_dim, class_dim)

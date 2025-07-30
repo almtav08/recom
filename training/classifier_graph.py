@@ -146,7 +146,7 @@ if __name__ == "__main__":
                 optimizer.step()
 
         model.eval()
-        X_test = X_all[0][:max_interactions]
+        X_test = X_all[i][:max_interactions]
         X_test = create_graph_from_path(X_test, Y_all[i], in_channels, device)
 
         proba = model.classify(X_test)[0]

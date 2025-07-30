@@ -56,7 +56,8 @@ if __name__ == "__main__":
     }
 
     # Count the number of Fail students
-    n_users = len(student_results) * 2
+    # n_users = len(student_results) * 2
+    n_users = len(student_results) + 21
     users = []
     for i in range(n_users):
         users.append(

@@ -1,31 +1,28 @@
-# Bucar el mejor valor de un fichero de history
-
+import sys
 import torch
 from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence, pad_packed_sequence
 from torch.nn import LSTM
 
+sys.path.append(".")
+from embedders.user.sasrecencoder import SASRecEncoder
+
 
 if __name__ == "__main__":
-    tensor_a = torch.Tensor([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]])
-    tensor_b = torch.Tensor([[0.7, 0.8, 0.9], [1.0, 1.1, 1.2], [1.3, 1.4, 1.5]])
+    batch_size = 4
+    seq_len = 10
+    embedding_dim = 64
 
-    print(f"Tensor A Size: {tensor_a.size()}")
-    print(f"Tensor B Size: {tensor_b.size()}")
+    # Simula secuencias de embeddings de recursos educativos
+    input_embs = torch.randn(batch_size, seq_len, embedding_dim)
 
-    batch_X = pad_sequence([tensor_a, tensor_b], batch_first=True)
-    print(f"Batch X Size: {batch_X.size()}")
+    # Máscara opcional (1 = real, 0 = padding)
+    mask = torch.ones(batch_size, seq_len).bool()
 
-    lengths = torch.tensor([2, 3])
-    packed_X = pack_padded_sequence(batch_X, lengths, batch_first=True, enforce_sorted=False)
-    print(packed_X)
-    print(f"Packed X Size: {packed_X.data.size()}")
+    # Instancia el modelo
+    model = SASRecEncoder(embedding_dim=embedding_dim, max_seq_length=seq_len)
 
-    lstm = LSTM(
-        input_size=3, hidden_size=2, batch_first=True
-    )
+    # Obtiene el embedding del estudiante
+    student_emb = model(input_embs, mask=mask, pooling="last")
 
-    packed_output, (ht, ct) = lstm(packed_X)
-    print(f"Packed Output: {packed_output}")
-
-    output, input_sizes = pad_packed_sequence(packed_output, batch_first=True)
-    print(output)
+    print("Student embedding shape:", student_emb.shape)
+    # → (batch_size, embedding_dim)
