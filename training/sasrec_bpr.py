@@ -22,9 +22,9 @@ def create_batch(batch_indices, X_train, max_seq_length, device):
 
     batch_X = pad_sequence(batch_X, batch_first=True).to(device)
 
-    mask = torch.ones(batch_X.shape[:2], device=device, dtype=torch.bool)
+    mask = torch.zeros(batch_X.shape[:2], device=device, dtype=torch.bool)
     for i, length in enumerate(lengths):
-        mask[i, length:] = 0
+        mask[i, length:] = 1
 
     return batch_X, mask
 
