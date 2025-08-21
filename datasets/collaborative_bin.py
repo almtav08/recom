@@ -56,7 +56,7 @@ class CollaborativeBinaryDataset(Dataset):
         anchor_path = self.user_paths[str(idx)]
 
         # Get embeddings for both paths
-        anchor_embedding = self.knowledge_embedder.embed(anchor_path).to(self.device)
+        anchor_embedding = self.knowledge_embedder.embed(anchor_path).detach().to(self.device)
         idx_anchor = idx
 
         return idx_anchor, anchor_embedding, anchor_path
